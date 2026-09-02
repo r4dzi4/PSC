@@ -4,8 +4,7 @@
 Projekt przedstawia kompleksową konfigurację sieci LAN/WAN dla przedsiębiorstwa z naciskiem na wysoką dostępność (High Availability), redundancję oraz bezpieczeństwo. Środowisko sieciowe zostało zintegrowane z usługami serwerowymi opartymi na systemie Windows Server.
 
 ## Topologia sieci
-![Schemat topologii sieci](topologia.png)
-*(Pamiętaj, aby nazwa pliku ze zdjęciem powyżej zgadzała się z tą wgraną do repozytorium)*
+Projekt_Sieci.jfif
 
 ## Wdrożone technologie i rozwiązania
 
