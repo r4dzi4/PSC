@@ -13,5 +13,5 @@ Projekt przedstawia kompleksową konfigurację sieci LAN z naciskiem na wysoką 
 * **Integracja z Windows Server:** Sieć to nie tylko urządzenia sieciowe. W VLAN 30 postawiłem działający **Windows Server**, który dostarcza usługi DHCP i DNS dla maszyn w innych segmentach sieci.
 
 ## Pliki w repozytorium
-* `projekt_sieci.png` - Toplogia sieci
+* `Projekt_Sieci.png` - Toplogia sieci
 * `Konfiguracje` - folder z plikami tekstowymi zawierającymi konfigurację (running-config) kluczowych urządzeń 
