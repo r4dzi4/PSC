@@ -1,4 +1,4 @@
-#  Projekt Sieci Firmowej z Integracją Windows Server
+#  Projekt Sieci z Integracją Windows Server
 
 ## Opis projektu
 Projekt przedstawia kompleksową konfigurację sieci LAN dla przedsiębiorstwa z naciskiem na wysoką dostępność (High Availability), redundancję oraz bezpieczeństwo. Środowisko sieciowe zostało zintegrowane z usługami serwerowymi opartymi na systemie Windows Server.
