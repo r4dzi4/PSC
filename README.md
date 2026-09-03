@@ -1,7 +1,7 @@
 #  Projekt Sieci z Integracją Windows Server
 
 ## Opis projektu
-Projekt przedstawia kompleksową konfigurację sieci LAN dla przedsiębiorstwa z naciskiem na wysoką dostępność (High Availability), redundancję oraz bezpieczeństwo. Środowisko sieciowe zostało zintegrowane z usługami serwerowymi opartymi na systemie Windows Server.
+Projekt przedstawia kompleksową konfigurację sieci LAN z naciskiem na wysoką dostępność (High Availability), redundancję oraz bezpieczeństwo. Środowisko sieciowe zostało zintegrowane z usługami serwerowymi opartymi na systemie Windows Server.
 
 ## Topologia sieci
 ![Schemat sieci](Projekt_Sieci.png)
