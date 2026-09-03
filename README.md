@@ -10,7 +10,7 @@ Projekt przedstawia kompleksową konfigurację sieci LAN dla przedsiębiorstwa z
 * **Agregacja łączy (LACP):** Kluczowe połączenia między przełącznikami wielowarstwowymi (MSW1 i MSW2) złączyłem w logiczny kanał (**EtherChannel/LACP**), zwiększając przepustowość i dodając redundancję.
 * **Redundancja bramy domyślnej:** Na styku warstwy L2 i L3 wdrożyłem protokół **HSRP**, zapewniając stacjom końcowym niezawodny dostęp do bramy nawet w przypadku awarii jednego z głównych switchy.
 * **Routing (OSPF) i wyjście na świat:** Komunikacja w rdzeniu opiera się na routingu dynamicznym **OSPF** (z adresacją /30 na łączach P2P do routera). Na routerze brzegowym (R1) uruchomiłem **PAT (NAT Overload)**, dając maszynom dostęp do Internetu.
-* **Integracja z Windows Server:** Sieć to nie tylko urządzenia sieciowe. W VLAN 30 postawiłem działający **Windows Server**, który dostarcza usługi DHCP i DNS dla maszyn klienckich (np. Windows 10) w innych segmentach sieci.
+* **Integracja z Windows Server:** Sieć to nie tylko urządzenia sieciowe. W VLAN 30 postawiłem działający **Windows Server**, który dostarcza usługi DHCP i DNS dla maszyn w innych segmentach sieci.
 
 ## Pliki w repozytorium
 * `projekt_sieci.png` - Toplogia sieci
