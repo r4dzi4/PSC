@@ -14,4 +14,4 @@ Projekt przedstawia kompleksową konfigurację sieci LAN z naciskiem na wysoką 
 
 ## Pliki w repozytorium
 * `Projekt_Sieci.png` - Toplogia sieci
-* `Konfiguracje` - folder z plikami tekstowymi zawierającymi konfigurację (running-config) kluczowych urządzeń 
+* `Konfiguracje` - Folder z plikami tekstowymi zawierającymi konfigurację (running-config) kluczowych urządzeń 
