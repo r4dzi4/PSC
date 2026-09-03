@@ -13,5 +13,5 @@ Projekt przedstawia kompleksową konfigurację sieci LAN/WAN dla przedsiębiorst
 * **Integracja z Windows Server:** Sieć to nie tylko urządzenia sieciowe. W VLAN 30 postawiłem działający **Windows Server**, który dostarcza usługi DHCP i DNS dla maszyn klienckich (np. Windows 10) w innych segmentach sieci.
 
 ## Pliki w repozytorium
-* `projekt_sieci.pkt` - plik źródłowy projektu (np. Packet Tracer / GNS3).
+* `projekt_sieci.png` - Toplogia sieci
 * `konfiguracje/` - folder z plikami tekstowymi zawierającymi konfigurację (running-config) kluczowych urządzeń (MSW1, MSW2, R1).
