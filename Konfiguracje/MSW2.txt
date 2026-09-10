@@ -1,6 +1,6 @@
 
 !
-! Last configuration change at 16:16:53 UTC Wed Sep 9 2026
+! Last configuration change at 10:22:21 UTC Thu Sep 10 2026
 !
 version 15.2
 service timestamps debug datetime msec
@@ -37,6 +37,7 @@ spanning-tree mode rapid-pvst
 spanning-tree portfast edge default
 spanning-tree portfast edge bpduguard default
 spanning-tree extend system-id
+spanning-tree vlan 20 priority 16384
 spanning-tree vlan 30 priority 24576
 !
 !
@@ -188,14 +189,15 @@ interface Vlan20
  ip helper-address 10.0.30.100 
  standby 0 preempt
  standby 20 ip 10.0.20.1
+ standby 20 priority 110
+ standby 20 preempt
  ip ospf 1 area 0
 !
 interface Vlan30
- ip flow ingress
- ip flow egress
  ip address 10.0.30.3 255.255.255.0
  standby 0 preempt
  standby 30 ip 10.0.30.1
+ standby 30 preempt
  ip ospf 1 area 0
 !
 router ospf 1
@@ -208,9 +210,6 @@ ip forward-protocol nd
 !
 ip http server
 ip http secure-server
-ip flow-export source Vlan30
-ip flow-export version 5
-ip flow-export destination 10.0.30.100 2055
 !
 ip ssh version 2
 ip ssh server algorithm encryption aes128-ctr aes192-ctr aes256-ctr
