@@ -1,6 +1,6 @@
 
 !
-! Last configuration change at 18:11:13 UTC Tue Sep 8 2026
+! Last configuration change at 15:32:58 UTC Sun Sep 13 2026 by Radek
 !
 version 15.6
 service timestamps debug datetime msec
@@ -15,7 +15,21 @@ boot-end-marker
 !
 enable secret 5 $1$B4md$5MSTW8k.3uNzWdEKZtvPT/
 !
-no aaa new-model
+aaa new-model
+!
+!
+aaa group server radius RAD_SEVER
+ server-private 10.0.30.100 auth-port 1812 acct-port 1813 key 7 073D20484B02485744
+!
+aaa authentication login default group RAD_SEVER local
+aaa authorization console
+aaa authorization exec default group RAD_SEVER local if-authenticated 
+!
+!
+!
+!
+!
+aaa session-id common
 ethernet lmi ce
 !
 !
@@ -239,6 +253,8 @@ snmp-server enable traps mpls vpn
 snmp-server enable traps vrfmib vrf-up vrf-down vnet-trunk-up vnet-trunk-down
 !
 !
+!
+!
 control-plane
 !
 banner exec 
@@ -274,14 +290,12 @@ line con 0
  privilege level 15
  password 7 107C081D001C43595F
  logging synchronous
- login
 line aux 0
  exec-timeout 0 0
  privilege level 15
  logging synchronous
 line vty 0 4
  password 7 0234055F0E0D5E731F
- login local
  transport input telnet ssh
 !
 no scheduler allocate
