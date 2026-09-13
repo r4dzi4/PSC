@@ -1,6 +1,6 @@
 
 !
-! Last configuration change at 18:45:10 UTC Wed Sep 9 2026
+! Last configuration change at 15:10:44 UTC Sun Sep 13 2026
 !
 version 15.2
 service timestamps debug datetime msec
@@ -16,7 +16,22 @@ boot-end-marker
 !
 enable secret 5 $1$jlEh$nKuPVAV6KmzjA/W81I3DZ/
 !
-no aaa new-model
+aaa new-model
+!
+!
+aaa group server radius RAD_SERVER
+ server-private 10.0.30.100 auth-port 1812 acct-port 1813 key 7 0234055F0E0D5E731F
+!
+aaa authentication login default group RAD_SERVER local
+aaa authorization console
+aaa authorization exec default group RAD_SERVER local if-authenticated 
+!
+!
+!
+!
+!
+!
+aaa session-id common
 !
 !
 !
@@ -199,6 +214,8 @@ ip ssh client algorithm encryption aes128-ctr aes192-ctr aes256-ctr
 !
 !
 !
+!
+!
 control-plane
 !
 banner exec 
@@ -232,11 +249,9 @@ By using the software, you agree to abide by the terms and conditions of the Cis
 line con 0
  password 7 08134D4A0C12544541
  logging synchronous
- login
 line aux 0
 line vty 0 4
  password 7 15200A0801217A767B
- login
 !
 !
 end
