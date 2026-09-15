@@ -11,6 +11,7 @@ Projekt przedstawia kompleksową konfigurację sieci LAN przedsiębiorstwa z nac
 * **Redundancja bramy domyślnej:** Na styku warstwy L2 i L3 wdrożyłem protokół **HSRP**, zapewniając stacjom końcowym niezawodny dostęp do bramy nawet w przypadku awarii jednego z głównych switchy.
 * **Routing (OSPF) i wyjście na świat:** Komunikacja w rdzeniu opiera się na routingu dynamicznym **OSPF** (z adresacją /30 na łączach P2P do routera). Na routerze brzegowym (R1) uruchomiłem **PAT (NAT Overload)**, dając maszynom dostęp do Internetu.
 * **Zabezpieczenia Warstwy Dostępowej (L2 Security):** Wdrożyłem rygorystyczne mechanizmy chroniące przed atakami w warstwie drugiej na przełącznikach dostępowych. Skonfigurowałem **DHCP Snooping** oraz **Dynamic ARP Inspection (DAI)** dla kluczowych sieci VLAN (10, 20, 30). Dostęp do portów brzegowych jest dodatkowo kontrolowany przez **Port Security** z restrykcyjnym limitem adresów MAC (opcja sticky).
+* **Scentralizowane uwierzytelnianie (AAA i RADIUS):** Wdrożyłem model AAA na urządzeniach sieciowych, integrując je z serwerem RADIUS działającym w środowisku Windows Server (NPS). Dostęp administracyjny jest weryfikowany w oparciu o poświadczenia domenowe, a w przypadku niedostępności serwera urządzenia automatycznie przełączają się na lokalną bazę (Fallback).
 
 ### Integracja z Windows Server i Usługi Systemowe
 
