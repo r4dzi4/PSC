@@ -19,18 +19,17 @@ Projekt przedstawia kompleksową konfigurację sieci LAN przedsiębiorstwa z nac
 
 * **Usługi Infrastrukturalne:** W VLAN 30 postawiłem działający **Windows Server**, który dostarcza kluczowe usługi **DHCP** i **DNS** dla maszyn w innych segmentach sieci.
 * **Usługi Domenowe (Active Directory AD DS):** Wdrożono domenę korporacyjną oraz logiczną strukturę jednostek organizacyjnych (**OU**) odzwierciedlającą podział na działy firmy, wraz z zarządzaniem kontami użytkowników i komputerów.
-* **Scentralizowane Zarządzanie i Bezpieczeństwo (GPO):** Skonfigurowano zasady grupy (**Group Policy Objects**) dla stacji roboczych z systemem Windows 10, w tym zaawansowane zasady audytu systemu (**Advanced Audit Policy**) monitorujące zdarzenia logowania i bezpieczeństwa.
-
-## Pliki w repozytorium
-* `Projekt_Sieci.png` - Toplogia sieci
-* `Konfiguracje` - Folder z plikami tekstowymi zawierającymi konfigurację (running-config) kluczowych urządzeń 
-### Integracja z Windows Server i Usługi Systemowe
-
-* **Usługi Infrastrukturalne:** W VLAN 30 postawiłem działający **Windows Server**, który dostarcza kluczowe usługi **DHCP** i **DNS** dla maszyn w innych segmentach sieci.
-* **Usługi Domenowe (Active Directory AD DS):** Wdrożono domenę korporacyjną oraz logiczną strukturę jednostek organizacyjnych (**OU**) odzwierciedlającą podział na działy firmy, wraz z zarządzaniem kontami użytkowników i komputerów.
   
   ![Drzewo Active Directory](screenshots/Drzewo_AD.png)
+
+* **Serwer Plików i Mapowanie Dysków (GPO):** Skonfigurowałem centralny serwer plików z odpowiednimi uprawnieniami dostępu (NTFS) podzielonymi na poszczególne działy. Zautomatyzowałem proces podłączania zasobów, wykorzystując zasady grupy (GPO) do dynamicznego mapowania dysków sieciowych po zalogowaniu użytkownika.
+
+  ![Mapowanie dysków GPO](screenshots/Mapowanie_GPO.png)
 
 * **Scentralizowane Zarządzanie i Bezpieczeństwo (GPO):** Skonfigurowano zasady grupy (**Group Policy Objects**) dla stacji roboczych z systemem Windows 10, w tym zaawansowane zasady audytu systemu (**Advanced Audit Policy**) monitorujące zdarzenia logowania i bezpieczeństwa.
 
   ![Konfiguracja GPO](screenshots/GPO.png)
+
+## Pliki w repozytorium
+* `Projekt_Sieci.png` - Toplogia sieci
+* `Konfiguracje` - Folder z plikami tekstowymi zawierającymi konfigurację (running-config) kluczowych urządzeń
