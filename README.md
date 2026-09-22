@@ -31,5 +31,5 @@ Projekt przedstawia kompleksową konfigurację sieci LAN przedsiębiorstwa z nac
   ![Konfiguracja GPO](screenshots/GPO.png)
 
 ## Pliki w repozytorium
-* `Projekt_Sieci.png` - Toplogia sieci
-* `Konfiguracje` - Folder z plikami tekstowymi zawierającymi konfigurację (running-config) kluczowych urządzeń
+* `Konfiguracje` - Folder z plikami tekstowymi zawierającymi konfigurację (running-config) kluczowych urządzeń sieciowych.
+* `screenshots` - Folder zawierający główny schemat topologii sieci oraz zrzuty ekranu dokumentujące poprawne działanie wdrożonych usług systemowych (AD, GPO, NPS).
