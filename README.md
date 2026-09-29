@@ -38,8 +38,8 @@ Projekt przedstawia konfigurację sieci LAN przedsiębiorstwa z naciskiem na wys
 * **Integracja SNMP:** Konfiguracja protokołu SNMP na urządzeniach Cisco (router brzegowy, przełączniki dystrybucyjne i dostępowe) w celu zdalnego zbierania metryk.
 * **Wizualizacja i Dashboardy:** Utworzenie dedykowanych pulpitów monitorujących w Zabbixie, które obejmują:
   * Utylizację procesora (CPU) i pamięci (RAM) na routerze brzegowym (R1).
-  * Obciążenie pasma na kluczowych łączach szkieletowych oraz zagregowanych portach (EtherChannel / Port-Channel).
-  * Bieżący stan operacyjny (UP/DOWN) kluczowych interfejsów przy użyciu mapowania wartości (Value Mapping).
+  * Obciążenie pasma na kluczowych łączach oraz zagregowanych portach (EtherChannel / Port-Channel).
+  * Bieżący stan operacyjny (UP/DOWN) kluczowych interfejsów.
 
   ![Zabbix Dashboard](screenshots/Zabbix_dashboard.png)
   
