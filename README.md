@@ -1,10 +1,10 @@
-#  Projekt Sieci z Integracją Windows Server
+# Projekt Sieci z Integracją Windows Server
 
 ## Opis projektu
 Projekt przedstawia konfigurację sieci LAN przedsiębiorstwa z naciskiem na wysoką dostępność (High Availability), redundancję oraz bezpieczeństwo. Środowisko sieciowe zostało zintegrowane z usługami serwerowymi opartymi na systemie Windows Server.
 
 ## Topologia sieci
-![Schemat sieci](screenshots/Projekt_Sieci.png)
+![Schemat sieci](screenshots/Topologia_v2.png)
 
 * **Niezawodność w warstwie 2 (STP Load Balancing):** Aby zapobiec pętlom i optymalnie wykorzystać łącza, wdrożyłem **Rapid-PVST+**. Skonfigurowałem MSW1 jako Root Bridge dla VLAN 10 (Klienci) i 30 (Serwery), natomiast MSW2 jest Rootem dla VLAN 20 (Goście).
 * **Agregacja łączy (LACP):** Kluczowe połączenia między przełącznikami wielowarstwowymi (MSW1 i MSW2) złączyłem w logiczny kanał (**EtherChannel/LACP**), zwiększając przepustowość i dodając redundancję.
@@ -30,6 +30,21 @@ Projekt przedstawia konfigurację sieci LAN przedsiębiorstwa z naciskiem na wys
 
   ![Konfiguracja GPO](screenshots/GPO.png)
 
+## 📊 Monitorowanie Infrastruktury (Zabbix & Linux)
+
+Środowisko zostało rozbudowane o system klasy NMS (Network Management System) w celu proaktywnego monitorowania stanu urządzeń sieciowych.
+
+* **Serwer Monitoringu:** Wdrożenie systemu operacyjnego **Linux (Ubuntu)** oraz instalacja i konfiguracja serwera **Zabbix**.
+* **Integracja SNMP:** Konfiguracja protokołu SNMP na urządzeniach Cisco (router brzegowy, przełączniki dystrybucyjne i dostępowe) w celu zdalnego zbierania metryk.
+* **Wizualizacja i Dashboardy:** Utworzenie dedykowanych pulpitów monitorujących w Zabbixie, które obejmują:
+  * Utylizację procesora (CPU) i pamięci (RAM) na routerze brzegowym (R1).
+  * Obciążenie pasma na kluczowych łączach szkieletowych oraz zagregowanych portach (EtherChannel / Port-Channel).
+  * Bieżący stan operacyjny (UP/DOWN) kluczowych interfejsów przy użyciu mapowania wartości (Value Mapping).
+
+  ![Zabbix Dashboard](screenshots/Zabbix_Dashboard.png)
+  
+  ![Status SNMP](screenshots/Zabbix_SNMP.png)
+
 ## Pliki w repozytorium
 * `Konfiguracje` - Folder z plikami tekstowymi zawierającymi konfigurację (running-config) kluczowych urządzeń sieciowych.
-* `screenshots` - Folder zawierający główny schemat topologii sieci oraz zrzuty ekranu dokumentujące poprawne działanie wdrożonych usług systemowych (AD, GPO, NPS).
+* `screenshots` - Folder zawierający główny schemat topologii sieci oraz zrzuty ekranu dokumentujące poprawne działanie wdrożonych usług systemowych (AD, GPO, NPS) oraz monitoringu (Zabbix).
