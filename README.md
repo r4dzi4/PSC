@@ -41,9 +41,9 @@ Projekt przedstawia konfigurację sieci LAN przedsiębiorstwa z naciskiem na wys
   * Obciążenie pasma na kluczowych łączach szkieletowych oraz zagregowanych portach (EtherChannel / Port-Channel).
   * Bieżący stan operacyjny (UP/DOWN) kluczowych interfejsów przy użyciu mapowania wartości (Value Mapping).
 
-  ![Zabbix Dashboard](screenshots/Zabbix_Dashboard.png)
+  ![Zabbix Dashboard](screenshots/Zabbix_dashboard.png)
   
-  ![Status SNMP](screenshots/Zabbix_SNMP.png)
+  ![Status SNMP](screenshots/Zabbix_hosts.png)
 
 ## Pliki w repozytorium
 * `Konfiguracje` - Folder z plikami tekstowymi zawierającymi konfigurację (running-config) kluczowych urządzeń sieciowych.
