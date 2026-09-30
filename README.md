@@ -38,7 +38,6 @@ Projekt przedstawia konfigurację sieci LAN przedsiębiorstwa z naciskiem na wys
 * **Serwer Monitoringu:** Wdrożenie systemu operacyjnego **Linux (Ubuntu)** oraz instalacja i konfiguracja serwera **Zabbix**.
 * **Integracja SNMP:** Konfiguracja protokołu SNMP na urządzeniach Cisco (router brzegowy, przełączniki dystrybucyjne i dostępowe) w celu zdalnego zbierania metryk.
 * **Wizualizacja i Dashboardy:** Utworzenie dedykowanych pulpitów monitorujących w Zabbixie, które obejmują:
-  * Utylizację procesora (CPU) i pamięci (RAM) na routerze brzegowym (R1).
   * Obciążenie pasma na kluczowych łączach oraz zagregowanych portach (EtherChannel / Port-Channel).
   * Bieżący stan operacyjny (UP/DOWN) kluczowych interfejsów.
 
