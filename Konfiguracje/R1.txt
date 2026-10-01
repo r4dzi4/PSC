@@ -1,6 +1,6 @@
 
 !
-! Last configuration change at 15:32:58 UTC Sun Sep 13 2026 by Radek
+! Last configuration change at 17:12:02 UTC Thu Oct 1 2026 by Radek
 !
 version 15.6
 service timestamps debug datetime msec
@@ -21,9 +21,12 @@ aaa new-model
 aaa group server radius RAD_SEVER
  server-private 10.0.30.100 auth-port 1812 acct-port 1813 key 7 073D20484B02485744
 !
-aaa authentication login default group RAD_SEVER local
+aaa group server radius RAD_SERVER
+ server-private 10.0.30.100 auth-port 1812 acct-port 1813 key 7 06340E254945584B56
+!
+aaa authentication login default group RAD_SERVER local
 aaa authorization console
-aaa authorization exec default group RAD_SEVER local if-authenticated 
+aaa authorization exec default group RAD_SERVER local if-authenticated 
 !
 !
 !
@@ -109,6 +112,7 @@ interface GigabitEthernet0/2
 !
 interface GigabitEthernet0/3
  no ip address
+ shutdown
  duplex auto
  speed auto
  media-type rj45
