@@ -16,6 +16,7 @@ boot-end-marker
 !
 enable secret 5 $1$jlEh$nKuPVAV6KmzjA/W81I3DZ/
 !
+username Radek secret 5 $1$/Fnm$Tj28/XTYR1JdaoxufHS5J/
 aaa new-model
 !
 !
