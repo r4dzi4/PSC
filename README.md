@@ -18,7 +18,7 @@ Projekt przedstawia konfigurację sieci LAN przedsiębiorstwa z naciskiem na wys
 ### Integracja z Windows Server i Usługi Systemowe
 
 * **Usługi Infrastrukturalne:** W VLAN 30 postawiłem działający **Windows Server**, który dostarcza kluczowe usługi **DHCP** i **DNS** dla maszyn w innych segmentach sieci.
-* ![DNS oraz DHCP](screenshots/DHCP_DNS.png)
+  ![DNS oraz DHCP](screenshots/DHCP_DNS.png)
 * **Usługi Domenowe (Active Directory AD DS):** Wdrożyłem domenę korporacyjną oraz logiczną strukturę jednostek organizacyjnych (**OU**) odzwierciedlającą podział na działy firmy, wraz z zarządzaniem kontami użytkowników i komputerów.
   
   ![Drzewo Active Directory](screenshots/Drzewo_AD.png)
