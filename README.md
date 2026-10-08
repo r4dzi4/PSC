@@ -44,7 +44,7 @@ Projekt przedstawia konfigurację sieci LAN przedsiębiorstwa z naciskiem na wys
 
   ![Konfiguracja GPO](screenshots/GPO.png)
 
-## 📊 Monitorowanie Infrastruktury (Zabbix & Linux)
+## Monitorowanie Infrastruktury (Zabbix & Linux)
 
 Środowisko rozbudowałem o system klasy NMS (Network Management System) w celu proaktywnego monitorowania stanu urządzeń sieciowych.
 
