@@ -4,7 +4,6 @@
 Projekt przedstawia konfigurację sieci LAN przedsiębiorstwa z naciskiem na wysoką dostępność (High Availability), redundancję oraz bezpieczeństwo. Środowisko sieciowe zintegrowałem z usługami serwerowymi opartymi na systemie Windows Server.
 
 ## Topologia sieci
-![Schemat sieci]()
 <p align="center"> <img src="screenshots/TOPOLOGIA_SIECI.drawio.png" alt="Schemat sieci">
 </p>
 
