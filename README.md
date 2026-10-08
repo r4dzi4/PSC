@@ -6,7 +6,7 @@
 ![Zabbix](https://img.shields.io/badge/Zabbix-D40000?style=for-the-badge&logo=zabbix&logoColor=white)
 
 ## Opis projektu
-Projekt przedstawia kompleksową konfigurację sieci LAN przedsiębiorstwa z naciskiem na wysoką dostępność (High Availability), redundancję oraz rygorystyczne zasady bezpieczeństwa (NetSec). Środowisko sieciowe oparto na emulatorze GNS3 i zintegrowano z usługami serwerowymi na bazie systemu Windows Server oraz systemem monitorowania Zabbix (Linux).
+Projekt przedstawia kompleksową konfigurację sieci LAN przedsiębiorstwa z naciskiem na wysoką dostępność (High Availability) oraz redundancję. Środowisko sieciowe oparto na emulatorze GNS3 i zintegrowano z usługami serwerowymi na bazie systemu Windows Server oraz systemem monitorowania Zabbix (Linux).
 
 ## Topologia sieci
 <p align="center">
