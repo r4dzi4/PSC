@@ -6,7 +6,7 @@
 ![Zabbix](https://img.shields.io/badge/Zabbix-D40000?style=for-the-badge&logo=zabbix&logoColor=white)
 
 ## Opis projektu
-Projekt przedstawia kompleksową konfigurację sieci LAN przedsiębiorstwa z naciskiem na wysoką dostępność (High Availability) oraz redundancję. Środowisko sieciowe oparto na emulatorze GNS3 i zintegrowano z usługami serwerowymi na bazie systemu Windows Server oraz systemem monitorowania Zabbix (Linux).
+Projekt przedstawia kompleksową konfigurację sieci LAN przedsiębiorstwa z naciskiem na wysoką dostępność (High Availability), redundancję oraz rygorystyczne zasady bezpieczeństwa (NetSec). Środowisko sieciowe oparto na zaawansowanym emulatorze GNS3 (Cisco IOS) i zintegrowano z usługami serwerowymi na bazie systemu Windows Server oraz systemem monitorowania Zabbix (Linux).
 
 ## Topologia sieci
 <p align="center">
@@ -20,27 +20,27 @@ Projekt przedstawia kompleksową konfigurację sieci LAN przedsiębiorstwa z nac
 | 10      | UZYTKOWNICY | 10.0.10.0/24 | Stacje robocze, strefa chroniona (DHCP Snooping, DAI)  |
 | 20      | GOSCIE      | 10.0.20.0/24 | Izolowany dostęp dla gości, ograniczony ruch sieciowy  |
 | 30      | SERWERY     | 10.0.30.0/24 | Windows Server (Active Directory, DHCP, DNS, GPO)      |
-| 40      | ZARZADZANIE | 10.0.40.0/24 | Linux (Zabbix), dedykowany interfejs zarządzający urządzeniami Cisco |
+| 40      | ZARZADZANIE | 10.0.40.0/24 | Linux (Zabbix), dedykowane interfejsy zarządzające sprzętem Cisco |
 
 ### Kluczowe Technologie i Protokoły Sieciowe
 
-* **Niezawodność w warstwie 2 (STP Load Balancing):** Aby zapobiec pętlom i optymalnie wykorzystać łącza, wdrożyłem **Rapid-PVST+**. Rozłożyłem obciążenie wskazując MSW1 jako Root Bridge dla VLAN 10 (Klienci) i 30 (Serwery), natomiast przełącznik MSW2 funkcjonuje jako Root dla VLAN 20 (Goście).
-* **Agregacja łączy (LACP):** Połączenia krzyżowe między przełącznikami rdzeniowymi/dystrybucyjnymi (MSW1 i MSW2) spiąłem w logiczny kanał **EtherChannel/LACP** w trybie Active, zwiększając przepustowość i dodając tolerancję na awarię fizycznych interfejsów.
-* **Redundancja bramy domyślnej (HSRP):** Na styku warstwy L2 i L3 wdrożyłem protokół **HSRP** ze śledzeniem priorytetów (Preempt). MSW1 działa jako aktywna brama dla użytkowników i serwerów (VLAN 10, 30), a MSW2 dla gości (VLAN 20), zapewniając ciągłość działania sieci.
-* **Bezpieczny routing OSPF w warstwie rdzenia:** Komunikację w rdzeniu oparłem na routingu dynamicznym **OSPF** (z adresacją /30 na łączach P2P do routera). W celu zabezpieczenia topologii przed wstrzykiwaniem fałszywych tras, interfejsy skierowane do sieci LAN (VLAN 10, 20, 30) ustawiłem jako **Passive-Interfaces**.
-* **Translacja Adresów i Filtracja (NAT/ACL):** Na routerze brzegowym (R1) uruchomiłem **PAT (NAT Overload)**. Dodatkowo wykorzystałem listy dostępu (ACL), np. całkowicie odcinając segment serwerów (VLAN 30) od wyjścia do strefy publicznej.
+* **Niezawodność w warstwie 2 (STP Load Balancing):** Aby zapobiec pętlom i optymalnie wykorzystać łącza, wdrożyłem **Rapid-PVST+**. Rozłożyłem obciążenie symetrycznie, wskazując MSW1 jako Root Bridge dla VLAN 10 (Klienci) i 30 (Serwery), natomiast przełącznik MSW2 funkcjonuje jako Root dla VLAN 20 (Goście) oraz 40 (Zarządzanie).
+* **Agregacja łączy (LACP):** Połączenia krzyżowe między przełącznikami dystrybucyjnymi (MSW1 i MSW2) spiąłem w logiczny kanał **EtherChannel/LACP** w trybie Active, zwiększając przepustowość i dodając sprzętową tolerancję na awarię.
+* **Redundancja bramy domyślnej (HSRP):** Na styku warstwy L2 i L3 wdrożyłem protokół **HSRP** ze śledzeniem priorytetów (Preempt). MSW1 działa jako aktywna brama dla użytkowników i serwerów (VLAN 10, 30), a MSW2 przetwarza ruch dla gości i zarządzania (VLAN 20, 40), zapewniając ciągłość działania sieci przy awarii sprzętowej.
+* **Bezpieczny routing OSPF w warstwie rdzenia:** Komunikację w rdzeniu oparłem na routingu dynamicznym **OSPF** (z adresacją /30 na łączach P2P do routera). W celu zabezpieczenia topologii przed wstrzykiwaniem fałszywych tras, interfejsy skierowane do sieci LAN (VLAN 10, 20, 30, 40) ustawiłem jako **Passive-Interfaces**.
+* **Translacja Adresów i Filtracja (NAT/ACL):** Na routerze brzegowym (R1) uruchomiłem **PAT (NAT Overload)** dla podsieci wewnętrznych. Dodatkowo wykorzystałem standardowe listy dostępu (ACL), całkowicie odcinając krytyczny segment serwerów (VLAN 30) od wyjścia do strefy publicznej Internetu.
 
 ### Zabezpieczenia (NetSec) i Uwierzytelnianie
 
-* **Zabezpieczenia Warstwy Dostępowej (L2 Security):** Wdrożyłem rygorystyczne mechanizmy ochrony na przełącznikach dostępowych (SW1, SW2, SW3). Sieć chroniona jest przez **DHCP Snooping** oraz **Dynamic ARP Inspection (DAI)**, a ruch kontrolny serwera przepuszczany jest dzięki konfiguracji `dhcp relay information trust-all` na warstwie dystrybucyjnej. Porty brzegowe ograniczyłem za pomocą **Port Security** (mechanizm Sticky MAC z restrykcyjnym limitem 3-5 urządzeń).
-* **Scentralizowane uwierzytelnianie (AAA i RADIUS):** Zarządzanie urządzeniami zabezpieczono modelem **AAA**, zintegrowanym z serwerem Windows Server (NPS). Uprawnienia administratorów bazują na kontach z Active Directory z wdrożonym systemem bazy awaryjnej (Local Fallback) na wypadek odcięcia serwera.
-* **Hardenizacja Protokołów (SSHv2 & SNMPv3):** Tradycyjne metody zarządzania zastąpiono standardami bezpiecznymi. Dostęp do CLI realizowany jest wyłącznie przez **SSHv2 z wyłącznym wsparciem dla silnych algorytmów AES** (128/192/256-ctr). Telemetria działa w oparciu o bezpieczny wariant **SNMPv3 (authPriv)**, a samo pobieranie metryk ograniczone jest regułami ACL tylko do podsieci zarządzania (VLAN 40).
+* **Zabezpieczenia Warstwy Dostępowej (L2 Security):** Wdrożyłem rygorystyczne mechanizmy ochrony na przełącznikach dostępowych. Sieć chroniona jest przez **DHCP Snooping** oraz **Dynamic ARP Inspection (DAI)**, a ruch kontrolny serwera przepuszczany jest dzięki konfiguracji `dhcp relay information trust-all` na warstwie dystrybucyjnej. Porty brzegowe ograniczyłem za pomocą **Port Security** (mechanizm Sticky MAC z restrykcyjnym limitem urządzeń).
+* **Scentralizowane uwierzytelnianie (AAA i RADIUS):** Zarządzanie urządzeniami zabezpieczono modelem **AAA**, zintegrowanym z serwerem Windows Server (NPS). Uprawnienia administratorów bazują na kontach z Active Directory z wdrożonym systemem bazy awaryjnej (Local Fallback) na wypadek utraty łączności z serwerem tożsamości.
+* **Hardenizacja Protokołów (SSHv2 & SNMPv3):** Tradycyjne metody zarządzania zastąpiono standardami szyfrowanymi. Dostęp do CLI realizowany jest wyłącznie przez **SSHv2 z wymuszeniem silnych algorytmów AES** (128/192/256-ctr). Telemetria działa w oparciu o bezpieczny wariant **SNMPv3 (authPriv)**, a dostęp do logów ograniczony jest regułami ACL tylko do wyizolowanej podsieci zarządzania (VLAN 40).
   
   ![Konfiguracja serwera RADIUS (NPS)](screenshots/W2025_RADIUS.png)
 
 ## Integracja z Windows Server i Usługi Systemowe
 
-* **Usługi Infrastrukturalne:** W VLAN 30 postawiłem działający **Windows Server**, który dostarcza scentralizowane usługi **DHCP** (z forwardowaniem ip helper-address) i **DNS** dla maszyn w pozostałych segmentach sieci.
+* **Usługi Infrastrukturalne:** W VLAN 30 postawiłem działający **Windows Server**, który dostarcza scentralizowane usługi **DHCP** (wspierane przez `ip helper-address` na przełącznikach) i **DNS** dla maszyn w pozostałych segmentach sieci.
   
   ![DNS oraz DHCP](screenshots/DHCP_DNS.png)
   
@@ -64,7 +64,7 @@ Projekt przedstawia kompleksową konfigurację sieci LAN przedsiębiorstwa z nac
 * **Integracja SNMPv3:** Skonfigurowałem uwierzytelniony i szyfrowany protokół SNMPv3 na urządzeniach Cisco (router brzegowy, przełączniki dystrybucyjne i dostępowe) do agregacji logów systemowych i sprzętowych.
 * **Wizualizacja i Dashboardy:** Utworzyłem dedykowane pulpity monitorujące w Zabbixie, które obejmują:
   * Obciążenie pasma na kluczowych łączach oraz zagregowanych portach (EtherChannel).
-  * Bieżący stan operacyjny (UP/DOWN) kluczowych interfejsów i systemów chłodzenia.
+  * Bieżący stan operacyjny (UP/DOWN) kluczowych interfejsów i systemów.
 
   ![Zabbix Dashboard](screenshots/Zabbix_dashboard.png)
   
@@ -74,5 +74,5 @@ Projekt przedstawia kompleksową konfigurację sieci LAN przedsiębiorstwa z nac
 
 | Nazwa Katalogu | Zawartość i Przeznaczenie |
 |----------------|---------------------------|
-| `Konfiguracje` | Folder z plikami tekstowymi zawierającymi zrzuconą konfigurację sprzętową (`running-config`) kluczowych urządzeń (Router, MSW1, MSW2, SW). |
+| `Konfiguracje` | Folder z plikami tekstowymi zawierającymi finalną konfigurację sprzętową (`running-config`) urządzeń Cisco (Router R1, przełączniki dystrybucyjne MSW oraz dostępowe SW). |
 | `screenshots`  | Zrzuty ekranu dokumentujące poprawne działanie usług systemowych (AD, GPO, NPS) oraz paneli monitoringu Zabbix. |
