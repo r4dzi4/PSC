@@ -10,6 +10,15 @@ Projekt przedstawia konfigurację sieci LAN przedsiębiorstwa z naciskiem na wys
 <p align="center"> <img src="screenshots/TOPOLOGIA_SIECI.drawio.png" alt="Schemat sieci">
 </p>
 
+### Architektura Adresacji i VLAN
+
+| ID VLAN | Nazwa VLAN  | Podsieć IP   | Opis / Usługi Systemowe                                |
+|---------|-------------|--------------|--------------------------------------------------------|
+| 10      | UZYTKOWNICY | 10.0.10.0/24 | Stacje robocze, ochrona DHCP Snooping                  |
+| 20      | GOSCIE      | 10.0.20.0/24 | Izolowany dostęp dla gości, ograniczony ruch sieciowy  |
+| 30      | SERWERY     | 10.0.30.0/24 | Windows Server (Active Directory, DHCP, DNS, GPO)      |
+| 40      | ZARZADZANIE | 10.0.40.0/24 | Linux (Zabbix, Rsyslog), interfejsy zarządzające Cisco |
+
 * **Niezawodność w warstwie 2 (STP Load Balancing):** Aby zapobiec pętlom i optymalnie wykorzystać łącza, wdrożyłem **Rapid-PVST+**. Skonfigurowałem MSW1 jako Root Bridge dla VLAN 10 (Klienci) i 30 (Serwery), natomiast MSW2 jest Rootem dla VLAN 20 (Goście).
 * **Agregacja łączy (LACP):** Kluczowe połączenia między przełącznikami wielowarstwowymi (MSW1 i MSW2) spiąłem w logiczny kanał (**EtherChannel/LACP**), zwiększając przepustowość i dodając redundancję.
 * **Redundancja bramy domyślnej:** Na styku warstwy L2 i L3 wdrożyłem protokół **HSRP**, zapewniając stacjom końcowym niezawodny dostęp do bramy nawet w przypadku awarii jednego z głównych switchy.
