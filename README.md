@@ -17,7 +17,7 @@ Projekt przedstawia konfigurację sieci LAN przedsiębiorstwa z naciskiem na wys
 | 10      | UZYTKOWNICY | 10.0.10.0/24 | Stacje robocze, ochrona DHCP Snooping                  |
 | 20      | GOSCIE      | 10.0.20.0/24 | Izolowany dostęp dla gości, ograniczony ruch sieciowy  |
 | 30      | SERWERY     | 10.0.30.0/24 | Windows Server (Active Directory, DHCP, DNS, GPO)      |
-| 40      | ZARZADZANIE | 10.0.40.0/24 | Linux (Zabbix, Rsyslog), interfejsy zarządzające Cisco |
+| 40      | ZARZADZANIE | 10.0.40.0/24 | Linux (Zabbix), interfejsy zarządzające Cisco |
 
 * **Niezawodność w warstwie 2 (STP Load Balancing):** Aby zapobiec pętlom i optymalnie wykorzystać łącza, wdrożyłem **Rapid-PVST+**. Skonfigurowałem MSW1 jako Root Bridge dla VLAN 10 (Klienci) i 30 (Serwery), natomiast MSW2 jest Rootem dla VLAN 20 (Goście).
 * **Agregacja łączy (LACP):** Kluczowe połączenia między przełącznikami wielowarstwowymi (MSW1 i MSW2) spiąłem w logiczny kanał (**EtherChannel/LACP**), zwiększając przepustowość i dodając redundancję.
