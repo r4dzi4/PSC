@@ -1,6 +1,6 @@
 
 !
-! Last configuration change at 17:12:02 UTC Thu Oct 1 2026 by Radek
+! Last configuration change at 15:01:28 UTC Thu Oct 8 2026 by Radek
 !
 version 15.6
 service timestamps debug datetime msec
@@ -112,7 +112,6 @@ interface GigabitEthernet0/2
 !
 interface GigabitEthernet0/3
  no ip address
- shutdown
  duplex auto
  speed auto
  media-type rj45
@@ -127,6 +126,7 @@ ip forward-protocol nd
 !
 no ip http server
 no ip http secure-server
+ip nat source list NATVLAN40 interface GigabitEthernet0/0 overload
 ip nat inside source list NATVLAN10 interface GigabitEthernet0/0 overload
 ip nat inside source list NATVLAN20 interface GigabitEthernet0/0 overload
 ip nat inside source list NATVLAN30 interface GigabitEthernet0/0 overload
@@ -141,8 +141,10 @@ ip access-list standard NATVLAN20
  permit 10.0.20.0 0.0.0.255
 ip access-list standard NATVLAN30
  permit 10.0.30.0 0.0.0.255
+ip access-list standard NATVLAN40
+ permit 10.0.40.0 0.0.0.255
 ip access-list standard STACJE_ADMINOW
- permit 10.0.30.0 0.0.0.255
+ permit 10.0.40.0 0.0.0.255
 !
 !
 snmp-server group ADMINI v3 priv read NOWY_WIDOK access STACJE_ADMINOW
