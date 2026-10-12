@@ -49,15 +49,19 @@ Projekt przedstawia konfigurację sieci LAN przedsiębiorstwa z naciskiem na wys
 ![Konfiguracja GPO](screenshots/GPO.png)
 
 ## Monitorowanie Infrastruktury (Zabbix & Linux)
-
-Środowisko rozbudowałem o system klasy NMS (Network Management System) w celu proaktywnego monitorowania stanu urządzeń sieciowych.
+## Monitorowanie Infrastruktury (Zabbix & Linux)
 
 - **Serwer Monitoringu:** Wdrożyłem system operacyjny **Linux (Ubuntu)** oraz zainstalowałem i skonfigurowałem serwer **Zabbix**.
-- **Bezpieczna integracja SNMPv3**: Wdrożyłem zabezpieczoną wersję protokołu SNMPv3 na wszystkich urządzeniach Cisco. Konfiguracja wykorzystuje autoryzację i silne szyfrowanie oraz ogranicza odczyt metryk (za pomocą widoków SNMP) wyłącznie do  wydzielonej stacji zarządzającej z VLAN 40, podnosząc poziom bezpieczeństwa infrastruktury.
-- **Wizualizacja i Dashboardy:** Utworzyłem dedykowane pulpity monitorujące w Zabbixie, które obejmują:
-  - Obciążenie pasma na kluczowych łączach oraz zagregowanych portach (EtherChannel / Port-Channel).
-  - Bieżący stan operacyjny (UP/DOWN) kluczowych interfejsów.
+- **Bezpieczna integracja SNMPv3**: Wdrożyłem zabezpieczoną wersję protokołu SNMPv3 na wszystkich urządzeniach Cisco. Konfiguracja wykorzystuje autoryzację i silne szyfrowanie oraz ogranicza odczyt metryk (za pomocą widoków SNMP) wyłącznie do wydzielonej stacji zarządzającej z VLAN 40, podnosząc poziom bezpieczeństwa infrastruktury.
+- **Wizualizacja i Dashboardy:** Utworzyłem dedykowane pulpity monitorujące w Zabbixie, które analizują kluczowe parametry środowiska:
+  - **Dla urządzeń sieciowych (np. MSW1):** Monitorowanie obciążenia pasma na głównych łączach, zagregowanych portach oraz bieżący stan interfejsów sieciowych.
+  - **Dla Windows Server 2025:** Ciągła analiza wydajności kluczowych zasobów, takich jak zużycie procesora (CPU), pamięci RAM, zajętość przestrzeni dyskowej oraz ruch na interfejsie sieciowym.
 
+![Zabbix - Monitorowanie przełącznika wielowarstwowego (MSW1)](screenshots/MSW1_ZABBIX.png)
+
+![Zabbix - Monitorowanie Windows Server](screenshots/zabbix_windows.png)
+
+![Status SNMP](screenshots/Zabbix_hosts.png)
 ![Zabbix Dashboard](screenshots/Zabbix_dashboard.png)
 
 ![Status SNMP](screenshots/Zabbix_hosts.png)
