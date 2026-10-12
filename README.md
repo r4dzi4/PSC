@@ -49,7 +49,6 @@ Projekt przedstawia konfigurację sieci LAN przedsiębiorstwa z naciskiem na wys
 ![Konfiguracja GPO](screenshots/GPO.png)
 
 ## Monitorowanie Infrastruktury (Zabbix & Linux)
-## Monitorowanie Infrastruktury (Zabbix & Linux)
 
 - **Serwer Monitoringu:** Wdrożyłem system operacyjny **Linux (Ubuntu)** oraz zainstalowałem i skonfigurowałem serwer **Zabbix**.
 - **Bezpieczna integracja SNMPv3**: Wdrożyłem zabezpieczoną wersję protokołu SNMPv3 na wszystkich urządzeniach Cisco. Konfiguracja wykorzystuje autoryzację i silne szyfrowanie oraz ogranicza odczyt metryk (za pomocą widoków SNMP) wyłącznie do wydzielonej stacji zarządzającej z VLAN 40, podnosząc poziom bezpieczeństwa infrastruktury.
