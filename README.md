@@ -22,11 +22,11 @@ Projekt przedstawia konfigurację sieci LAN przedsiębiorstwa z naciskiem na wys
 
 - **Niezawodność w warstwie 2 (STP Load Balancing)**: Aby zapobiec pętlom i optymalnie wykorzystać łącza, wdrożyłem Rapid-PVST+. Skonfigurowałem MSW1 jako główny most (Root Bridge) dla VLAN 10 (Klienci) i 30 (Serwery), natomiast przełącznik MSW2 pełni rolę Root Bridge'a dla VLAN 20 (Goście) oraz 40 (Zarządzanie). Pozwala to na równomierne rozłożenie ruchu na wszystkich łączach w warstwie drugiej.
 - **Agregacja łączy (LACP):** Kluczowe połączenia między przełącznikami wielowarstwowymi (MSW1 i MSW2) spiąłem w logiczny kanał (**EtherChannel/LACP**), zwiększając przepustowość i dodając redundancję.
-- **Redundancja bramy domyślnej i optymalizacja L3**: Na styku warstwy L2 i L3 wdrożyłem protokół HSRP, gwarantujący stacjom końcowym niezawodny dostęp do bramy domyślnej. Konfigurację HSRP zsynchronizowałem z topologią STP – MSW1 jest bramą aktywną (Active) dla VLAN 10 i 30, a MSW2 dla VLAN 20 i 40. Zapobiega to powstawaniu zjawiska routingu asymetrycznego.
+- **Redundancja bramy domyślnej i optymalizacja L3**: Na styku warstwy L2 i L3 wdrożyłem protokół HSRP, gwarantujący stacjom końcowym niezawodny dostęp do bramy domyślnej. Konfigurację HSRP zsynchronizowałem z topologią STP – MSW1 jest bramą aktywną (Active) dla VLAN 10 i 30, a MSW2 dla VLAN 20 i 40.
 - **Filtrowanie Ruchu i Polityki Bezpieczeństwa (ACL)**: Na przełącznikach warstwy trzeciej oraz routerze brzegowym wdrożyłem szczegółowe listy kontroli dostępu. Sieć gościnna (VLAN 20) została całkowicie odizolowana od sieci firmowych, z zachowaniem dostępu do usług DHCP oraz Internetu.
 - **Routing (OSPF) i wyjście na świat:** Komunikację w rdzeniu oparłem na routingu dynamicznym **OSPF** (z adresacją /30 na łączach P2P do routera). Na routerze brzegowym (R1) uruchomiłem **PAT (NAT Overload)**, dając maszynom dostęp do Internetu.
 - **Zabezpieczenia Warstwy Dostępowej (L2 Security):** Wdrożyłem mechanizmy chroniące przed atakami w warstwie drugiej na przełącznikach dostępowych. Skonfigurowałem **DHCP Snooping** oraz **Dynamic ARP Inspection (DAI)** dla kluczowych sieci VLAN (10, 20, 30). Dostęp do portów brzegowych zabezpieczyłem dodatkowo za pomocą **Port Security** z restrykcyjnym limitem adresów MAC (opcja sticky).
-- **Scentralizowane uwierzytelnianie (AAA i RADIUS):** Wdrożyłem model AAA na urządzeniach sieciowych, integrując je z serwerem RADIUS działającym w środowisku Windows Server (NPS). Dostęp administracyjny weryfikuję w oparciu o poświadczenia domenowe, a w przypadku niedostępności serwera skonfigurowałem automatyczne przełączanie się urządzeń na lokalną bazę (Fallback).
+- **Scentralizowane uwierzytelnianie (AAA i RADIUS):** Wdrożyłem model AAA na urządzeniach sieciowych, integrując je z serwerem RADIUS działającym w środowisku Windows Server (NPS). Dostęp administracyjny weryfikuję w oparciu o poświadczenia domenowe, a w przypadku niedostępności serwera skonfigurowałem automatyczne przełączanie się urządzeń na lokalną bazę.
 
 ![Konfiguracja serwera RADIUS (NPS)](screenshots/W2025_RADIUS.png)
 
@@ -44,7 +44,7 @@ Projekt przedstawia konfigurację sieci LAN przedsiębiorstwa z naciskiem na wys
 
 ![Mapowanie dysków GPO](screenshots/Mapowanie_GPO.png)
 
-- **Scentralizowane Zarządzanie i Bezpieczeństwo (GPO):** Skonfigurowałem zasady grupy (**Group Policy Objects**) dla stacji roboczych z systemem Windows 10, w tym zaawansowane zasady audytu systemu (**Advanced Audit Policy**) monitorujące zdarzenia logowania i bezpieczeństwa.
+- **Scentralizowane Zarządzanie i Bezpieczeństwo (GPO):** Skonfigurowałem zasady grupy (**Group Policy Objects**) dla stacji roboczych z systemem Windows 10.
 
 ![Konfiguracja GPO](screenshots/GPO.png)
 
@@ -53,7 +53,7 @@ Projekt przedstawia konfigurację sieci LAN przedsiębiorstwa z naciskiem na wys
 Środowisko rozbudowałem o system klasy NMS (Network Management System) w celu proaktywnego monitorowania stanu urządzeń sieciowych.
 
 - **Serwer Monitoringu:** Wdrożyłem system operacyjny **Linux (Ubuntu)** oraz zainstalowałem i skonfigurowałem serwer **Zabbix**.
-- **Bezpieczna integracja SNMPv3**: Wdrożyłem zabezpieczoną wersję protokołu SNMPv3 na wszystkich urządzeniach Cisco. Konfiguracja wykorzystuje autoryzację i silne szyfrowanie oraz ogranicza odczyt metryk (za pomocą widoków SNMP) wyłącznie do   wydzielonej stacji zarządzającej z VLAN 40, podnosząc poziom bezpieczeństwa infrastruktury.
+- **Bezpieczna integracja SNMPv3**: Wdrożyłem zabezpieczoną wersję protokołu SNMPv3 na wszystkich urządzeniach Cisco. Konfiguracja wykorzystuje autoryzację i silne szyfrowanie oraz ogranicza odczyt metryk (za pomocą widoków SNMP) wyłącznie do  wydzielonej stacji zarządzającej z VLAN 40, podnosząc poziom bezpieczeństwa infrastruktury.
 - **Wizualizacja i Dashboardy:** Utworzyłem dedykowane pulpity monitorujące w Zabbixie, które obejmują:
   - Obciążenie pasma na kluczowych łączach oraz zagregowanych portach (EtherChannel / Port-Channel).
   - Bieżący stan operacyjny (UP/DOWN) kluczowych interfejsów.
