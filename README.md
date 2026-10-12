@@ -62,7 +62,6 @@ Projekt przedstawia konfigurację sieci LAN przedsiębiorstwa z naciskiem na wys
 ![Zabbix - Monitorowanie Windows Server](screenshots/zabbix_windows.png)
 
 ![Status SNMP](screenshots/Zabbix_hosts.png)
-![Zabbix Dashboard](screenshots/Zabbix_dashboard.png)
 
 ![Status SNMP](screenshots/Zabbix_hosts.png)
 
