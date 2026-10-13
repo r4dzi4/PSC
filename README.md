@@ -62,8 +62,6 @@ Projekt przedstawia konfigurację sieci LAN przedsiębiorstwa z naciskiem na wys
 
 ![Status SNMP](screenshots/Zabbix_hosts.png)
 
-![Status SNMP](screenshots/Zabbix_hosts.png)
-
 ## Pliki w repozytorium
 - `Konfiguracje` - Folder z plikami tekstowymi zawierającymi konfigurację (running-config) kluczowych urządzeń sieciowych.
 - `screenshots` - Folder zawierający główny schemat topologii sieci oraz zrzuty ekranu dokumentujące poprawne działanie wdrożonych przeze mnie usług systemowych (AD, GPO, NPS) oraz monitoringu (Zabbix).
